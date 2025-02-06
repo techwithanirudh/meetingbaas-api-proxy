@@ -6,7 +6,7 @@ export const config = {
   runtime: 'edge'
 }
 
-const app = new Hono().basePath('/')
+const app = new Hono().basePath('/api')
 
 app.all('/*', async (c) => {
   const { API_URL } = env<{ API_URL: string }>(c as any)
