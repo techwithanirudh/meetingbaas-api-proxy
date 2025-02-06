@@ -13,7 +13,7 @@ app.use('/*', cors())
 app.all('/*', async (c) => {
   const { API_URL } = env<{ API_URL: string }>(c as any)
 
-  const res = await fetch(API_URL || "https://api.meetingbaas.com", {
+  const res = await fetch(API_URL || "https://api.meetingbaas.com" + c.req.url, {
     ...c.req.raw,
   });
   const newResponse = new Response(res.body, res);
