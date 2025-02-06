@@ -12,9 +12,9 @@ const app = new Hono().basePath('/api')
 app.use('/*', cors())
 app.all('/*', async (c) => {
   const { API_URL } = env<{ API_URL: string }>(c as any)
-  const routePath = c.req.routePath.replace(/^\/api/, '');
+  const routePath = c.req.path.replace(/^\/api/, '');
   const targetUrl = new URL(routePath, API_URL || "https://api.meetingbaas.com").toString();
-
+console.log(targetUrl)
   const res = await fetch(targetUrl, {
     ...c.req.raw,
   });
