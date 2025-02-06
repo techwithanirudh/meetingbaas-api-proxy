@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import { env } from 'hono/adapter'
+import { cors } from 'hono/cors'
 
 export const config = {
   runtime: 'edge'
@@ -8,6 +9,7 @@ export const config = {
 
 const app = new Hono().basePath('/api')
 
+app.use('/*', cors())
 app.all('/*', async (c) => {
   const { API_URL } = env<{ API_URL: string }>(c as any)
 
