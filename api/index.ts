@@ -9,7 +9,7 @@ export const config = {
 const app = new Hono().basePath('/')
 
 app.all('/*', async (c) => {
-  const { API_URL } = env<{ API_URL: string }>(c)
+  const { API_URL } = env<{ API_URL: string }>(c as any)
 
   const res = await fetch(API_URL || "https://api.meetingbaas.com", {
     ...c.req.raw,
