@@ -14,9 +14,10 @@ app.all('/*', async (c) => {
   const { API_URL } = env<{ API_URL: string }>(c as any)
   const routePath = c.req.path.replace(/^\/api/, '');
   const targetUrl = new URL(routePath, API_URL || "https://api.meetingbaas.com").toString();
-console.log(targetUrl)
+console.log(c.req.raw.headers)
   const res = await fetch(targetUrl, {
     ...c.req.raw,
+    headers: c.req.raw.headers
   });
   const newResponse = new Response(res.body, res);
   return newResponse;
