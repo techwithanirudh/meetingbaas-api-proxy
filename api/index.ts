@@ -14,6 +14,7 @@ app.all('/*', async (c) => {
   const target = new URL(url.pathname.replace(/^\/api/, '') + url.search, API_URL || "https://api.meetingbaas.com")
   const res = await fetch(target.toString(), {
     ...c.req.raw,
+    method: c.req.method,
     headers: c.req.raw.headers,
   })
   return new Response(res.body, res)
